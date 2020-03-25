@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class AddressBookAboutController implements Initializable {
     
     @FXML private Button closeAboutButton;
+
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {}

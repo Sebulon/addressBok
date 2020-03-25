@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,6 +18,8 @@ import javafx.stage.Stage;
 public class AddressBookController implements Initializable {
     
     @FXML private MenuBar menuBar;
+    @FXML private Button newButton;
+    @FXML private Button deleteButton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
