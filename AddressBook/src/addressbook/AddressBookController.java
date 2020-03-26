@@ -13,27 +13,32 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import se.chalmers.cse.dat215.lab1.Presenter;
 
+
 public class AddressBookController implements Initializable {
     
     @FXML private MenuBar menuBar;
-    @FXML private Button newButton;
-    @FXML private Button deleteButton;
-    @FXML private MenuItem newContactMenu;
-    @FXML private MenuItem deleteContactMenu;
-    @FXML private ListView contactList;
-    @FXML private TextField firstNameText;
-    @FXML private TextField lastNameText;
-    @FXML private TextField phoneText;
-    @FXML private TextField emailText;
-    @FXML private TextField addressText;
-    @FXML private TextField postcodeText;
-    @FXML private TextField cityText;
+    @FXML private Button new_button;
+    @FXML private Button delete_button;
+    @FXML private TextField firstName_input;
+    @FXML private TextField lastName_input;
+    @FXML private TextField phone_input;
+    @FXML private TextField email_input;
+    @FXML private TextField address_input;
+    @FXML private TextField postCode_input;
+    @FXML private TextField city_input;
+    @FXML private ListView contact_list;
+
     private Presenter presenter;
+
+
 
     private class TextFieldListener implements ChangeListener<Boolean>{
 
@@ -44,47 +49,50 @@ public class AddressBookController implements Initializable {
         }
 
         @Override
-        public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-            if(newValue){
+        public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+            if (t1){
                 presenter.textFieldFocusGained(textField);
-
-            }
-            else{
+            }else{
                 presenter.textFieldFocusLost(textField);
             }
         }
     }
-    
+
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        presenter = new Presenter(
-                contactList,
-                firstNameText,
-                lastNameText,
-                phoneText,
-                emailText,
-                addressText,
-                postcodeText,
-                cityText);
-
+        presenter = new Presenter(contact_list, firstName_input, lastName_input, phone_input,
+                email_input, address_input, postCode_input, city_input);
         presenter.init();
 
-        contactList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
-
+        contact_list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
-            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+            public void changed(ObservableValue observableValue, Object o, Object t1) {
+
                 presenter.contactsListChanged();
             }
-
         });
 
-        firstNameText.focusedProperty().addListener(new TextFieldListener(firstNameText));
-        lastNameText.focusedProperty().addListener(new TextFieldListener(lastNameText));
-        phoneText.focusedProperty().addListener(new TextFieldListener(phoneText));
-        emailText.focusedProperty().addListener(new TextFieldListener(emailText));
-        addressText.focusedProperty().addListener(new TextFieldListener(addressText));
-        postcodeText.focusedProperty().addListener(new TextFieldListener(postcodeText));
-        cityText.focusedProperty().addListener(new TextFieldListener(cityText));
+        firstName_input.focusedProperty().addListener(new TextFieldListener(firstName_input));
+        lastName_input.focusedProperty().addListener(new TextFieldListener(lastName_input));
+        phone_input.focusedProperty().addListener(new TextFieldListener(phone_input));
+        email_input.focusedProperty().addListener(new TextFieldListener(email_input));
+        address_input.focusedProperty().addListener(new TextFieldListener(address_input));
+        postCode_input.focusedProperty().addListener(new TextFieldListener(postCode_input));
+        city_input.focusedProperty().addListener(new TextFieldListener(city_input));
+    }
+
+    @FXML
+    protected void newButtonActionPerformed (ActionEvent event){
+        presenter.newContact();
+    }
+
+    @FXML
+    protected void deleteButtonActionPerformed (ActionEvent event){
+        presenter.removeCurrentContact();
     }
     
     @FXML 
@@ -105,20 +113,5 @@ public class AddressBookController implements Initializable {
         
         Stage addressBookStage = (Stage) menuBar.getScene().getWindow();
         addressBookStage.hide();
-    }
-
-    @FXML
-    protected void newButtonActionPerformed (ActionEvent event){
-        presenter.newContact();
-    }
-
-    @FXML
-    protected void deleteButtonActionPerformed (ActionEvent event){
-        presenter.removeCurrentContact();
-    }
-
-    @FXML
-    protected void textFieldActionPerformed (ActionEvent event){
-        presenter.textFieldActionPerformed(event);
-    }
+    }    
 }

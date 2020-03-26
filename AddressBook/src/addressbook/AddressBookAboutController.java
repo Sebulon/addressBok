@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import se.chalmers.cse.dat215.lab1.Presenter;
 
 public class AddressBookAboutController implements Initializable {
     
@@ -16,11 +17,13 @@ public class AddressBookAboutController implements Initializable {
 
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}
+    public void initialize(URL url, ResourceBundle rb) {
+    }
     
     @FXML 
     protected void closeAboutActionPerformed(ActionEvent event) throws IOException{
         Stage aboutStage = (Stage) closeAboutButton.getScene().getWindow();
         aboutStage.hide();
-    }    
+    }
+
 }

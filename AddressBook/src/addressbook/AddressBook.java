@@ -23,7 +23,6 @@ public class AddressBook extends Application {
         
         stage.setTitle(bundle.getString("application.name"));
         stage.setScene(scene);
-        stage.setMinWidth(300);
         stage.getIcons().add(new Image("addressbook/resources/frameIcon32.gif"));
         stage.show();
     }
@@ -34,6 +33,7 @@ public class AddressBook extends Application {
     public static void main(String[] args) {
         launch(args);
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
             public void run() {
                 Model.getInstance().shutDown();
             }
